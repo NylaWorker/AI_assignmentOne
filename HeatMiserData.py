@@ -152,31 +152,11 @@ with open('dataHeatMiser.csv', 'w') as csvfile:
             #     '''
 
             '''This is the base algorithm'''
-            baseAlgorithm(curTem, curHum, temPercent, humPercent, office)
-            # if curHum > 48. and curTem > 73.:
-            #     if temPercent > humPercent:
-            #         lowTemp(office)
-            #     else:
-            #         lowHum(office)
-            # elif curHum < 47. and curTem < 73.:
-            #     if temPercent > humPercent:
-            #         raiseTemp(office)
-            #     else:
-            #         raiseHum(office)
-            #
-            # elif curHum < 47. and curTem > 73.:
-            #     #raiseHum(office)
-            #     if temPercent > humPercent:
-            #         lowTemp(office)
-            #     else:
-            #         raiseHum(office)
-            #
-            # elif curHum > 48. and curTem < 73.:
-            #     ##raiseTemp(office)
-            #     if temPercent > humPercent:
-            #         raiseTemp(office)
-            #     else:
-            #         lowHum(office)
+            if trialCount < 15:
+                baseAlgorithm(curTem, curHum, temPercent, humPercent, office)
+            else:
+                print("working crap")
+
             office += 1
             if office == 11:
                 trialCount += 1
