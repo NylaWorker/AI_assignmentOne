@@ -107,10 +107,7 @@ abs(idealAverage - current office value)/abs(maximum value and minimum value)
 
 '''
 runs = 0
-humAveIss = 0
-temAveIss = 0
-humStdIss = 0
-humStdIss = 0
+
 with open('dataHeatNew1.csv', 'w') as csvfile:
     datawriter = csv.writer(csvfile)
 
@@ -142,39 +139,14 @@ with open('dataHeatNew1.csv', 'w') as csvfile:
                 curHum = rooms[office][1][0]
                 temPercent = math.fabs(73. - curTem) / math.fabs(maxTem - minTem + 4.)
                 humPercent = math.fabs(48. - curHum) / math.fabs(maxHum - minHum + 4.)
-                if trialCount ==  80:
+                if trialCount ==  100:
                     runs = runs +1
-                    print("Issues:")
-                    if math.ceil(averageRooms("Tem")) != 73:
-                        print("temave")
-                        temAveIss = 1
-                        print(math.ceil(averageRooms("Tem")))
-                    if math.ceil(averageRooms("Hum")) != 48:
-                        humAveIss = 1
-                        print("humave")
-                        print(math.ceil(averageRooms("Hum")))
-                    if stdRooms("Tem") > 1.5:
-                        print("stdtem")
-                        temStdIss = 1
-                        print(stdRooms("Tem"))
-                    if stdRooms("Hum") > 1.7:
-                        print("stdhum")
-                        humStdIss = 1
-                        print(stdRooms("Hum"))
                     break
-                #     if math.ceil(averageRooms("Tem")) != 73 and math.ceil(averageRooms("Hum")) != 48:
-                #     '''
-                #     there are issues with convergence with the initial algorithm.
-                #     This is why I need another version.
-                #     '''
 
                 '''This is the base algorithm'''
 
                 if trialCount < 20:
                     baseAlgorithm(curTem, curHum, temPercent, humPercent, office)
-
-
-
                 else:
 
                     if math.ceil(averageRooms("Tem")) == 73 and math.ceil(averageRooms("Hum")) == 48 and stdRooms("Tem") > 1.5 and stdRooms("Hum") < 1.7:
@@ -221,14 +193,6 @@ with open('dataHeatNew1.csv', 'w') as csvfile:
                         basicSolution(curTem, curHum, office)
 
 
-                if trialCount == 15 and office == 10:
-                    print("This is the number of run", x)
-                    print(":::::::::::::::::::::::::::::::::15th:::::::::::::::::::::::::::::::::")
-                    print(math.ceil(averageRooms("Tem")))
-                    print(math.ceil(averageRooms("Hum")))
-                    print(stdRooms("Tem"))
-                    print(stdRooms("Hum"))
-
 
                 office += 1
                 if office == 11:
@@ -240,20 +204,4 @@ with open('dataHeatNew1.csv', 'w') as csvfile:
                 datawriter.writerow([x+1,trialCount,initialAveragesHum, averageRooms("Hum"), initialStdHum, stdRooms("Hum"),initialAveragesTem, averageRooms("Tem"), initialStdTem, stdRooms("Tem"),humAveIss,humStdIss,temAveIss,temStdIss])
 
 
-        print("Number of failures", runs)
-        # datawriter.writerow([y,runs])
-            # if math.ceil(averageRooms("Tem")) != 73 :
-            #     print("fixing ave tem")
-            #
-            # if math.ceil(averageRooms("Hum")) != 48:
-            #     print("fixing hum ave")
-            # if stdRooms("Tem") > 1.5:
-            #     print("need to fix std tem")
-            # if stdRooms("Hum") > 1.7:
-            #     print("need to fix std hum")
 
-    # print(trialCount)
-    # print("This is the final std", stdRooms())
-    # print("This is the final ave", averageRooms())
-    # print(" This is the final condition of the rooms")
-    # print(rooms.T)

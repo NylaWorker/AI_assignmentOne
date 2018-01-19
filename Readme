@@ -1,0 +1,12 @@
+There are three files with the following descriptions:
+HeatMiser.py
+    This files runs the algorithm one time and produces the results as a terminal output asked by the assignement.
+    It does not always converge nicely so it will shut down if it has not converged by a 100 trials.
+HeatMiserData.py
+    This just does the algorithm for a 100 times and does a 100 trials (can be changed to whatever value is desired.) and outputs it into a csv file.
+BiggerDataHeatmiser.py
+    This one does it repeatedely for more trials to test how this works scalably.
+
+ In order to run this just type python3 name of file.
+
+
