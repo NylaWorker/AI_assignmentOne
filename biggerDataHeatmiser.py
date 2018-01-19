@@ -68,14 +68,12 @@ def baseAlgorithm(curTem, curHum, temPercent, humPercent, office):
             raiseHum(office)
 
     elif curHum < 47. and curTem > 73.:
-        # raiseHum(office)
         if temPercent > humPercent:
             lowTemp(office)
         else:
             raiseHum(office)
 
     elif curHum > 48. and curTem < 73.:
-        ##raiseTemp(office)
         if temPercent > humPercent:
             raiseTemp(office)
         else:
@@ -113,11 +111,11 @@ humAveIss = 0
 temAveIss = 0
 humStdIss = 0
 humStdIss = 0
-with open('dataHeatMiser.csv', 'w') as csvfile:
+with open('dataHeatNew1.csv', 'w') as csvfile:
     datawriter = csv.writer(csvfile)
 
     datawriter.writerow(["Number of Run"," Trial Count", "Initial Average Hum","Average hum after algorithm", " Initial Standard hum deviation", "Standard deviation hum after algorithm",  "Initial Average tem","Average tem after algorithm", " Initial Standard tem deviation", "Standard deviation tem after algorithm", "humAveIss ", "humStdIss","temAveIss","temStdIss"])
-    for y in range(0,100):
+    for y in range(0,5):
         runs = 0
         for x in range(0,100):
             temps = np.random.uniform(low=minTem, high=maxTem, size=(12,))[np.newaxis]
@@ -146,7 +144,7 @@ with open('dataHeatMiser.csv', 'w') as csvfile:
                 humPercent = math.fabs(48. - curHum) / math.fabs(maxHum - minHum + 4.)
                 if trialCount ==  80:
                     runs = runs +1
-                    print("fuq up:")
+                    print("Issues:")
                     if math.ceil(averageRooms("Tem")) != 73:
                         print("temave")
                         temAveIss = 1
@@ -192,7 +190,6 @@ with open('dataHeatMiser.csv', 'w') as csvfile:
                     elif math.ceil(averageRooms("Tem")) == 73 or math.ceil(averageRooms("Hum")) == 48 or stdRooms("Tem") < 1.5 or stdRooms("Hum") > 1.7:
                         if math.fabs(curHum - 48) > .5:
                             if curHum > 48:
-                                print(curHum)
                                 lowHum(office)
                                 if (math.ceil(averageRooms("Hum")) != 48):
                                     raiseHum(office)
@@ -203,7 +200,6 @@ with open('dataHeatMiser.csv', 'w') as csvfile:
                     elif math.ceil(averageRooms("Tem")) != 73 or math.ceil(averageRooms("Hum")) == 48 or stdRooms("Tem") < 1.5 or stdRooms("Hum") < 1.7:
                         if math.fabs(curTem - 73) < 1.5:
                             if curTem > 73:
-                                print(curHum)
                                 lowTemp(office)
                                 if (stdRooms("Tem") > 1.5):
                                     raiseTemp(office)
